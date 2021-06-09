@@ -8,10 +8,10 @@ public class NotaFiscalVO {
 
     private Integer orderId;
     private Calendar orderDate;
-    private BigDecimal netAmount;
-    private BigDecimal totalAmount;
     private String FirstName;
     private String LastName;
+    private BigDecimal netAmount;
+    private BigDecimal totalAmount;
     private List<ItemOrderlinesVO> listItemOrderLinesVO;
 
     public Integer getOrderId() {
@@ -30,6 +30,22 @@ public class NotaFiscalVO {
         this.orderDate = orderDate;
     }
 
+    public String getFirstName() {
+        return FirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
     public BigDecimal getNetAmount() {
         return netAmount;
     }
@@ -44,22 +60,6 @@ public class NotaFiscalVO {
 
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
-    }
-
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String customerFirstName) {
-        this.FirstName = customerFirstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String customerLastName) {
-        this.LastName = customerLastName;
     }
 
     public List<ItemOrderlinesVO> getListItemOrderLinesVO() {

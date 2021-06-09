@@ -58,16 +58,16 @@ public class OrdersController {
     }
 
 
-    @PostMapping("/save")
-    public ResponseEntity<Orders> save(@RequestBody Orders orders){
-        //return alunoService.save(aluno);
-        HttpHeaders headers = new HttpHeaders();
-
-        if(null != ordersService.save(orders))
-            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.OK);
-        else
-            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.BAD_REQUEST);
-    }
+//    @PostMapping("/save")
+//    public ResponseEntity<Orders> save(@RequestBody Orders orders){
+//        //return alunoService.save(aluno);
+//        HttpHeaders headers = new HttpHeaders();
+//
+//        if(null != ordersService.save(orders))
+//            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.OK);
+//        else
+//            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.BAD_REQUEST);
+//    }
 
     @PutMapping("/update")
     public Orders update(@RequestBody Orders orders){
@@ -98,16 +98,28 @@ public class OrdersController {
 
 
 
-
-//    @PostMapping ("/saveVO")
-//    public ResponseEntity<OrdersVO> save(@RequestBody OrdersVO ordersVO){
+//IAN********
+//    @PostMapping("/saveVO")
+//    public ResponseEntity<Orders> saveVO(@RequestBody OrdersVO ordersVO) {
 //        HttpHeaders headers = new HttpHeaders();
+//        Orders newOrder = ordersService.saveVO(ordersVO);
 //
-//        OrdersVO novoOrdersVO = ordersService.save(ordersVO);
-//
-//        if(null != novoOrdersVO)
-//            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.OK);
+//        if (null != newOrder)
+//            return new ResponseEntity<>(newOrder, headers, HttpStatus.OK);
 //        else
-//            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.BAD_REQUEST);
+//            return new ResponseEntity<>(newOrder, headers, HttpStatus.BAD_REQUEST);
 //    }
+
+//    NOSSOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!
+    @PostMapping ("/saveVO")
+    public ResponseEntity<OrdersVO> saveVO(@RequestBody OrdersVO ordersVO){
+        HttpHeaders headers = new HttpHeaders();
+
+        OrdersVO novoOrdersVO = ordersService.saveVO(ordersVO);
+
+        if(null != novoOrdersVO)
+            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.BAD_REQUEST);
+    }
 }

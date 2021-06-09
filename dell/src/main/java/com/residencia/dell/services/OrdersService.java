@@ -28,6 +28,9 @@ public class OrdersService {
     @Autowired
     public ProductsRepository productsRepository;
 
+    @Autowired
+    public CustomersRepository customersRepository;
+
 
     public Orders findById(Integer id){
         return ordersRepository.findById(id).get();
@@ -171,40 +174,79 @@ public class OrdersService {
         return nfpVO;
     }
 
+//NOOOOOSSSOOOOOO!!!!!!!!
+    public OrdersVO saveVO(OrdersVO ordersVO) {
+        Orders newOrders = convertVOParaEntidade(ordersVO, null);
+        ordersRepository.save(newOrders);
+        return convertEntidadeParaVO(newOrders);
+    }
 
-//    public OrdersVO save(OrdersVO ordersVO) {
-//        Orders newOrders = convertVOParaEntidade(ordersVO, null);
-//        ordersRepository.save(newOrders);
-//        return convertEntidadeParaVO(newOrders);
+   private Orders convertVOParaEntidade(OrdersVO ordersVO, Integer id) {
+        Orders orders = new Orders();
+       Customers customer = customersRepository.getById(ordersVO.getCustomerId());
+
+        List<Orderlines> listOrderlines = new ArrayList<>();
+
+        orders.setOrderId(ordersVO.getOrderId());
+        orders.setOrderDate(ordersVO.getOrderDate());
+        orders.setNetAmount(ordersVO.getNetAmount());
+        orders.setTax(ordersVO.getTax());
+        orders.setTotalAmount(ordersVO.getTotalAmount());
+        orders.setCustomers(customer);
+
+
+        for (OrderlinesVO lOrderLinesVO : ordersVO.getListOrderLinesVO()) {
+            Orderlines orderlines = new Orderlines();
+
+            orderlines.setOrderDate(lOrderLinesVO.getOrderDate());
+            orderlines.setOrderLineId(lOrderLinesVO.getOrderLineId());
+            orderlines.setProdId(lOrderLinesVO.getProdId());
+            orderlines.setQuantity(lOrderLinesVO.getQuantity());
+
+            listOrderlines.add(orderlines);
+        }
+
+        orders.setListOrdersLines(listOrderlines);
+
+
+        return orders;
+    }
+
+//    IAN******
+//    public Orders saveVO(OrdersVO ordersVO) {
+//
+//        Orders newOrders = ordersRepository.save(convertVOParaEntidade(ordersVO));
+//
+//        return newOrders;
+//
 //    }
 //
-//   private Orders convertVOParaEntidade(OrdersVO ordersVO, Integer id) {
+//    private Orders convertVOParaEntidade(OrdersVO ordersVO) {
 //        Orders orders = new Orders();
 //
-//        List<Orderlines> listOrderlines = new ArrayList<>();
+//        Customers customer = customersRepository.getById(ordersVO.getCustomerId());
 //
-//        orders.setOrderId(ordersVO.getOrderId());
-//        orders.setOrderDate(ordersVO.getOrderDate());
 //        orders.setNetAmount(ordersVO.getNetAmount());
+//        orders.setOrderDate(ordersVO.getOrderDate());
+//        orders.setOrderId(ordersVO.getOrderId());
 //        orders.setTax(ordersVO.getTax());
 //        orders.setTotalAmount(ordersVO.getTotalAmount());
+//        orders.setCustomers(customer);
 //
-//
-//        for (OrderlinesVO lOrderLinesVO : ordersVO.getListOrderLinesVO()) {
+//        List<Orderlines> listOrderLines = new ArrayList<>();
+//        for (OrderlinesVO itemOrderLinesVO : ordersVO.getListOrderLinesVO()) {
 //            Orderlines orderlines = new Orderlines();
 //
-//            orderlines.setOrderDate(lOrderLinesVO.getOrderDate());
-//            orderlines.setOrderLineId(lOrderLinesVO.getOrderLineId());
-//            orderlines.setProdId(lOrderLinesVO.getProdId());
-//            orderlines.setQuantity(lOrderLinesVO.getQuantity());
+//            orderlines.setOrderDate(itemOrderLinesVO.getOrderDate());
+//            orderlines.setOrderLineId(itemOrderLinesVO.getOrderLineId());
+//            orderlines.setProdId(itemOrderLinesVO.getProdId());
+//            orderlines.setQuantity(itemOrderLinesVO.getQuantity());
 //
-//            listOrderlines.add(orderlines);
+//            listOrderLines.add(orderlines);
 //        }
 //
-//        orders.setListOrdersLines(listOrderlines);
-//
+//        orders.setListOrdersLines(listOrderLines);
 //
 //        return orders;
 //    }
-
 }
