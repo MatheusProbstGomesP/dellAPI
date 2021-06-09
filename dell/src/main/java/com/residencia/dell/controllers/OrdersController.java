@@ -58,16 +58,16 @@ public class OrdersController {
     }
 
 
-//    @PostMapping("/save")
-//    public ResponseEntity<Orders> save(@RequestBody Orders orders){
-//        //return alunoService.save(aluno);
-//        HttpHeaders headers = new HttpHeaders();
-//
-//        if(null != ordersService.save(orders))
-//            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.OK);
-//        else
-//            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.BAD_REQUEST);
-//    }
+    @PostMapping("/save")
+    public ResponseEntity<Orders> save(@RequestBody Orders orders){
+        //return alunoService.save(aluno);
+        HttpHeaders headers = new HttpHeaders();
+
+        if(null != ordersService.save(orders))
+            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.OK);
+        else
+            return new ResponseEntity<Orders>(ordersService.save(orders), headers, HttpStatus.BAD_REQUEST);
+    }
 
     @PutMapping("/update")
     public Orders update(@RequestBody Orders orders){
