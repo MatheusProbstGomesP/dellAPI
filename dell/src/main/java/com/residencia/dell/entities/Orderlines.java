@@ -1,12 +1,13 @@
 package com.residencia.dell.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
+@Validated
 @Table(name = "orderlines")
 public class Orderlines {
     @Id
