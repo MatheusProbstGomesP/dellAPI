@@ -5,6 +5,7 @@ import com.residencia.dell.entities.Orders;
 import com.residencia.dell.exceptions.CustomException;
 import com.residencia.dell.services.OrderlinesService;
 import com.residencia.dell.services.OrdersService;
+import com.residencia.dell.vo.NotaFiscalVO;
 import com.residencia.dell.vo.OrdersVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -98,11 +99,13 @@ public class OrdersController {
 
     }
 
-//    @GetMapping("/nf/{id}")
-//    public ResponseEntity<NotaFiscalVO> NFfindById(@PathVariable Integer id){
-//        HttpHeaders headers = new HttpHeaders();
-//        return new ResponseEntity<>(ordersService.NFfindById(id),headers,HttpStatus.OK);
-//    }
+    @GetMapping("/nf/{id}")
+    public ResponseEntity<NotaFiscalVO> NFfindById(@PathVariable Integer id){
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(ordersService.NFfindById(id),headers,HttpStatus.OK);
+    }
+
+
 //    @GetMapping("/nf/{id}")
 //    public ResponseEntity<NotaFiscalVO> emailNotaFiscal(@PathVariable NotaFiscalVO emailVO) throws MessagingException, EmailException {
 //        HttpHeaders headers = new HttpHeaders();
@@ -123,6 +126,7 @@ public class OrdersController {
 //        else
 //            return new ResponseEntity<>(newOrder, headers, HttpStatus.BAD_REQUEST);
 //    }
+
 
 
 //    NOSSOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!
