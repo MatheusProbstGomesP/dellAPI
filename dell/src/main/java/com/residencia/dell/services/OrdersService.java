@@ -176,12 +176,11 @@ public class OrdersService {
 
 //NOOOOOSSSOOOOOO!!!!!!!!
     public OrdersVO saveVO(OrdersVO ordersVO) {
-        Orders newOrders = convertVOParaEntidade(ordersVO, null);
-        ordersRepository.save(newOrders);
+        Orders newOrders = ordersRepository.save(convertVOParaEntidade(ordersVO));
         return convertEntidadeParaVO(newOrders);
     }
 
-   private Orders convertVOParaEntidade(OrdersVO ordersVO, Integer id) {
+   private Orders convertVOParaEntidade(OrdersVO ordersVO) {
         Orders orders = new Orders();
        Customers customer = customersRepository.getById(ordersVO.getCustomerId());
 

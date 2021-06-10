@@ -1,6 +1,8 @@
 package com.residencia.dell.controllers;
 
+import com.residencia.dell.entities.Orderlines;
 import com.residencia.dell.entities.Orders;
+import com.residencia.dell.services.OrderlinesService;
 import com.residencia.dell.services.OrdersService;
 import com.residencia.dell.vo.NotaFiscalVO;
 import com.residencia.dell.vo.OrdersVO;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,6 +20,9 @@ import java.util.List;
 public class OrdersController {
     @Autowired
     private OrdersService ordersService;
+
+    @Autowired
+    private OrderlinesService orderlinesService;
 
     @GetMapping("/{id}")
     public ResponseEntity<Orders> findById(@PathVariable Integer id){
@@ -110,16 +116,18 @@ public class OrdersController {
 //            return new ResponseEntity<>(newOrder, headers, HttpStatus.BAD_REQUEST);
 //    }
 
+
 //    NOSSOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!!!!!!
     @PostMapping ("/saveVO")
-    public ResponseEntity<OrdersVO> saveVO(@RequestBody OrdersVO ordersVO){
+    public Orders saveVO(@Valid @RequestBody OrdersVO ordersVO){
         HttpHeaders headers = new HttpHeaders();
 
-        OrdersVO novoOrdersVO = ordersService.saveVO(ordersVO);
-
-        if(null != novoOrdersVO)
-            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.OK);
-        else
-            return new ResponseEntity<>(novoOrdersVO, headers, HttpStatus.BAD_REQUEST);
+        OrdersVO savedOrder = ordersService.saveVO(ordersVO);
+        Integer id = savedOrder.getOrderId();
+        for (Orderlines odl: ordersService.findById(id).getListOrdersLines()){
+            odl.setOrdersId(ordersService.findById(id));
+             orderlinesService.save(odl);
+        }
+        return ordersService.findById(id);
     }
 }

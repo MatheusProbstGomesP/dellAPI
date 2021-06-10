@@ -10,6 +10,7 @@ import java.util.Calendar;
 @Table(name = "orderlines")
 public class Orderlines {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderlineid")
     private Integer orderLineId;
 
