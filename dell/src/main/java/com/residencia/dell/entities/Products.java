@@ -1,6 +1,8 @@
 package com.residencia.dell.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
@@ -14,6 +16,8 @@ public class Products {
     @Column(name = "category")
     private Integer category;
 
+    @NotBlank
+    @Size(max = 30)
     @Column(name = "title")
     private String title;
 

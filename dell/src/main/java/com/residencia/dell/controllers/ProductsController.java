@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,7 @@ public class ProductsController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<Products> save(@RequestBody Products products){
-        //return alunoService.save(aluno);
+    public ResponseEntity<Products> save(@Valid @RequestBody Products products){
         HttpHeaders headers = new HttpHeaders();
 
         if(null != productsService.save(products))
@@ -48,7 +48,7 @@ public class ProductsController {
     }
 
     @PutMapping("/update")
-    public Products update(@RequestBody Products products){
+    public Products update(@Valid @RequestBody Products products){
 
         return productsService.update(products);
     }
